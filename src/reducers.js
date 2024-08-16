@@ -1,4 +1,4 @@
-import { applyMiddleware } from "redux";
+
 import { combineReducers } from "redux";
 
 function cartReducer(state = { cart: [], error: null }, action) {
