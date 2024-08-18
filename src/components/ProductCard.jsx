@@ -2,7 +2,7 @@ import React from "react";
 
 function ProductCard() {
   return (
-    <div className=" h-52 w-28 sm:h-96 sm:w-64  text-black flex flex-col justify-between mt-2 mb-2 sm:mt-4 sm:mb-4">
+    <div className=" h-52 w-28 sm:h-96 sm:w-64  text-black flex flex-col justify-between mt-2 mb-2 sm:mt-4 hover:scale-105 transition-transform duration-300 sm:mb-4">
       <div className=" bg-card p-3 rounded-md shadow-elevate h-40 w-28 sm:h-80 sm:w-64 flex flex-col">
         <img
           className="rounded-md h-2/3 w-full"
