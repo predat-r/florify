@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-function ShopNowBtn() {
+import { asyncGetProducts } from "../actions";
+import { connect } from "react-redux";
+import store from "../store";
+function ShopNowBtn({fetchProducts}) {
   return (
-    <button className="w-40 h-9  rounded-lg  mt-10 sm:mt-12 md:mt-24 bg-bars">
+    <button onClick={fetchProducts} className="w-40 h-9  rounded-lg  mt-10 sm:mt-12 md:mt-24 bg-bars">
       <Link to="/Home">Shop Now</Link>
     </button>
   );
-}
-
-export default ShopNowBtn;
+};
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: () => dispatch(asyncGetProducts()),
+})
+export default connect(null,mapDispatchToProps)(ShopNowBtn);

@@ -1,7 +1,8 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import Intro from "../components/Intro";
-function Landing() {
+
+function Landing({fetchProducts}) {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center font-inter text-white box-border overflow-hidden">
@@ -11,8 +12,9 @@ function Landing() {
         src="src/assets/nahil-naseer-xljtGZ2-P3Y-unsplash.jpg"
       ></img>
       <SearchBar></SearchBar>
-      <Intro></Intro>
+      <Intro fetchProducts={fetchProducts}></Intro>
     </div>
   );
 }
+
 export default Landing;

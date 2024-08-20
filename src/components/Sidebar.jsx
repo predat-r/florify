@@ -15,7 +15,7 @@ function Sidebar() {
             <li className="m-3  hover:text-gray-100">indoor</li>
           </ul>
         </li>
-        <l1>
+        <li>
           Price
           <ul className=" text-center text-gray-300 font-extralight text-xs sm:text-lg ">
             <li className="m-3  hover:text-gray-100">$5-$10</li>
@@ -24,7 +24,7 @@ function Sidebar() {
             <li className="m-3  hover:text-gray-100">$25-$50</li>
             <li className="m-3  hover:text-gray-100">$50-</li>
           </ul>
-        </l1>
+        </li>
       </ul>
     </div>
   );
