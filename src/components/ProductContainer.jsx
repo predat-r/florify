@@ -3,22 +3,19 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
 function ProductContainer({ products }) {
-
-  
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    
     if (products.products[0]) {
       setProductList(products.products[0]);
     }
   }, [products.products]);
-  const gridStyle = {
-    gridTemplateColumns: `repeat(${4}, 1fr)`,
-    gap: `${9}px`,
-  };
+
   return (
-    <div className="w-full h-full ml-3 pr-5 pl-5 pt-1 mb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9  sm:gap-4" style={gridStyle}>
+    <div
+      className="w-full h-full ml-3 pr-5 pl-5 pt-1 mb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9  sm:gap-4"
+      style={{ height: height }}
+    >
       {productList.length > 0 ? (
         productList.map((product) => (
           <ProductCard
@@ -27,8 +24,7 @@ function ProductContainer({ products }) {
             name={product.name}
             categories={product.categories}
             price={product.price}
-            image = {product.image
-            }
+            image={product.image}
             rating={product.rating}
           />
         ))
@@ -38,6 +34,5 @@ function ProductContainer({ products }) {
     </div>
   );
 }
-
 
 export default ProductContainer;
