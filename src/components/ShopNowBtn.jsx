@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import store from "../store";
 function ShopNowBtn({fetchProducts}) {
   return (
-    <button onClick={fetchProducts} className="w-40 h-9  rounded-lg  mt-10 sm:mt-12 md:mt-24 bg-bars">
+    <button onClick={fetchProducts} className="w-40 h-9  rounded-lg  mt-[5vh] sm:mt-12 md:mt-24 bg-bars">
       <Link to="/Home">Shop Now</Link>
     </button>
   );

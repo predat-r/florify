@@ -3,7 +3,6 @@ import React from "react";
 function ProductCard({ id, name, categories, price, image, rating }) {
   let Goldstars = rating;
   let greyStars = 5 - Goldstars;
-  console.log(Goldstars)
   const stars = [
     ...Array(Goldstars).fill("gold"),
     ...Array(greyStars).fill("grey"),

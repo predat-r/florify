@@ -7,7 +7,9 @@ import SortingBtn from "../components/SortingBtn";
 import { connect } from "react-redux";
 import { useState } from "react";
 import { mirage } from "ldrs";
-function Home({ products }) {
+import { asyncGetProducts } from "../actions";
+import PageSelector from "../components/pageSelector";
+function Home({ products,getProducts }) {
   mirage.register();
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -16,6 +18,12 @@ function Home({ products }) {
       setLoaded(true);
     }
   }, [products]);
+  useEffect(() => {
+    if(!loaded){
+        getProducts();
+    }
+  }, []);
+  
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll">
       <Navbar></Navbar>
@@ -27,8 +35,13 @@ function Home({ products }) {
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>
             <SortingBtn></SortingBtn>
           </div>
+          <div className="flex flex-col h-full w-full">
           <ProductContainer products={products}></ProductContainer>
+
+          <PageSelector></PageSelector>
+          </div>
         </div>
+        
       </div>
     </div>
   ) : (
@@ -53,5 +66,7 @@ function Home({ products }) {
 const mapStateToProps = (state) => ({
   products: state.products,
 });
-
-export default connect(mapStateToProps)(Home);
+const mapdispatchToprops = (dispatch) => ({
+  getProducts:() => dispatch(asyncGetProducts()),
+})
+export default connect(mapStateToProps,mapdispatchToprops)(Home);

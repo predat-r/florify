@@ -1,4 +1,4 @@
-import store from "./store";
+
 //product list actions
 export const getProducts = (products) =>  {
   return {
@@ -9,7 +9,7 @@ export const getProducts = (products) =>  {
 export function asyncGetProducts() {
   return async dispatch => {
     try {
-      const url = "https://96a24d6d0004713e0a34cf796fdbbbc7.serveo.net/plants/";
+      const url = "https://f31034629432850f201ef0a8321d47ff.serveo.net/plants/";
       const response = await fetch(url, { method: "GET" });
       const data = await response.json();
       dispatch(getProducts(data));

@@ -13,9 +13,12 @@ function ProductContainer({ products }) {
       setProductList(products.products[0]);
     }
   }, [products.products]);
-
+  const gridStyle = {
+    gridTemplateColumns: `repeat(${4}, 1fr)`,
+    gap: `${9}px`,
+  };
   return (
-    <div className="w-full h-full ml-3 pr-5 pl-5 pt-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9 sm:gap-4">
+    <div className="w-full h-full ml-3 pr-5 pl-5 pt-1 mb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9  sm:gap-4" style={gridStyle}>
       {productList.length > 0 ? (
         productList.map((product) => (
           <ProductCard
