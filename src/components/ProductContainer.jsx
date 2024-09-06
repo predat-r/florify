@@ -6,16 +6,12 @@ function ProductContainer({ products }) {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    if (products.products[0]) {
-      setProductList(products.products[0]);
+    if (products) {
+      setProductList(products);
     }
-  }, [products.products]);
-
+  }, [products]);
   return (
-    <div
-      className="w-full h-full ml-3 pr-5 pl-5 pt-1 mb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9  sm:gap-4"
-      style={{ height: height }}
-    >
+    <div className="w-full h-full ml-3 pr-5 pl-5 pt-1  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-9  sm:gap-4">
       {productList.length > 0 ? (
         productList.map((product) => (
           <ProductCard

@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
 
-function PageSelector() {
+function PageSelector({ numOfPages, setPage }) {
   return (
-    <div className=" w-full h-1/6 flex justify-center items-center font-inter text-bars font-bold text-lg ">1.2.3</div>
-  )
+    <div className=" h-5 sm:h-7 md:h-8 lg:h-10 w-full flex flex-row justify-center text-sm md:text-lg items-center mb-5 text-center  ">
+      {Array.from({ length: numOfPages }).map((_, index) => (
+        <div 
+        onClick={()=>{setPage(index+1)}}
+          key={index}
+          className="w-5 h-5 sm:w-8 sm:h-7  mt-10 bg-green-950 rounded-sm  sm:rounded-md flex items-center justify-center cursor-pointer m-1"
+        >
+          {index + 1}
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default PageSelector
+export default PageSelector;
