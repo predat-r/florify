@@ -7,7 +7,7 @@ function PageSelector({ numOfPages, setPage }) {
         <div 
         onClick={()=>{setPage(index+1)}}
           key={index}
-          className="w-5 h-5 sm:w-8 sm:h-7  mt-10 bg-green-950 rounded-sm  sm:rounded-md flex items-center justify-center cursor-pointer m-1"
+          className="w-5 h-5 sm:w-8 sm:h-7  mt-10 bg-bars rounded-sm  sm:rounded-md flex items-center justify-center cursor-pointer m-1"
         >
           {index + 1}
         </div>

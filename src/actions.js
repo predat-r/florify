@@ -16,7 +16,7 @@ export function asyncGetProducts() {
             name: "Plant A",
             price: 19.99,
             rating: 3,
-            image: "src/assets/aloe.webp",
+            image: "src/assets/snake-plant.webp",
             categories: ["Indoor", "Succulent"],
           },
           {
@@ -24,7 +24,7 @@ export function asyncGetProducts() {
             name: "Plant B",
             price: 29.99,
             rating: 4,
-            image: "src/assets/aloe.webp",
+            image: "src/assets/peperomia.webp",
             categories: ["Outdoor"],
           },
           {
@@ -32,7 +32,7 @@ export function asyncGetProducts() {
             name: "Plant C",
             price: 15.99,
             rating: 4,
-            image: "src/assets/aloe.webp",
+            image: "src/assets/chinese-evergreen.webp",
             categories: ["Succulent"],
           },
           {
@@ -40,7 +40,7 @@ export function asyncGetProducts() {
             name: "Plant D",
             price: 25.99,
             rating: 4,
-            image: "src/assets/aloe.webp",
+            image: "src/assets/grape-ivy.webp",
             categories: ["Indoor", "Flowering"],
           },
           {
@@ -56,7 +56,7 @@ export function asyncGetProducts() {
             name: "Plant F",
             price: 29.99,
             rating: 4,
-            image: "src/assets/aloe.webp",
+            image: "src/assets/dieffenbachia.webp",
             categories: ["Indoor"],
           },
           {
@@ -108,11 +108,6 @@ export function asyncGetProducts() {
             categories: ["Cactus", "Indoor"],
           },
         ];
-        
-
-
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       dispatch(getProducts(placeholderProducts));
     } catch (error) {

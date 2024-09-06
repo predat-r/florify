@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import CartCard from "../components/CartCard";
 import { connect } from "react-redux";
+import CheckoutBtn from "../components/CheckoutBtn";
 function Cart({ productcart }) {
   const [cart, setCart] = useState(productcart);
   const cartLength = cart.length;
+  const [TotalAmount, setTotalAmount] = useState(0);
   const updateQuantity = (id, amount) => {
     const newCart = cart
       .map((product) => {
@@ -16,7 +18,18 @@ function Cart({ productcart }) {
       .filter((product) => product.Quantity > 0);
     setCart(newCart);
   };
-
+  const calculateTotalAmount = () => {
+    let newTotal = 0;
+    cart.forEach((element) => {
+      newTotal = newTotal + element.Quantity * element.price;
+      
+    });
+    newTotal = newTotal.toFixed(2);
+    setTotalAmount(parseFloat(newTotal));
+  };
+  useEffect(() => {
+    calculateTotalAmount();
+  }, [cart]);
   const increaseQuantity = (id) => {
     updateQuantity(id, 1);
   };
@@ -26,9 +39,9 @@ function Cart({ productcart }) {
   };
 
   return (
-    <div className="w-screen p-5 h-screen flex flex-col bg-background overflow-scroll">
+    <div className="w-screen p-3 md:p-5 h-screen flex flex-col bg-background overflow-scroll">
       <Navbar></Navbar>
-      <h1 className="font-inter text-3xl mt-5 text-bars font-bold mb-5 ">
+      <h1 className="font-inter text-xl md:text-3xl mt-5 text-bars font-bold mb-5 ">
         {cartLength > 0
           ? cartLength + ` item${cartLength > 1 ? "s" : ""} in cart`
           : "Cart is Empty :("}
@@ -46,6 +59,16 @@ function Cart({ productcart }) {
           decreaseQuantity={decreaseQuantity}
         ></CartCard>
       ))}
+      {cart.length > 0 ? (
+        <div className=" flex justify-end flex-row">
+          <div className=" w-3/4 sm:w-2/4 p-3 sm:p-5  h-full flex flex-row justify-between items-center">
+          <h1 className=" text-md sm:ml-10 sm:text-xl text-bars font-bold ">
+            Subtotal : ${TotalAmount}
+          </h1>
+          <CheckoutBtn></CheckoutBtn>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -16,8 +16,10 @@ function ProductContainer({ products, addProductToCart }) {
     if (product) {
       addProductToCart({ ...product, Quantity });
     }
-    console.log("setting it true");
-    setAddedProductToCart(true);
+    setAddedProductToCart(false);
+    setTimeout(() => {
+      setAddedProductToCart(true);
+    }, 10);
   };
   return (
     <>
@@ -39,9 +41,10 @@ function ProductContainer({ products, addProductToCart }) {
         ) : (
           <p>No products available.</p> // Fallback message if productList is empty
         )}
-  
       </div>
-      {addedProductToCart?(<PopUp  setAddedProductToCart={setAddedProductToCart}></PopUp>):null}
+      {addedProductToCart ? (
+        <PopUp setAddedProductToCart={setAddedProductToCart}></PopUp>
+      ) : null}
     </>
   );
 }
