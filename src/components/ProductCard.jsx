@@ -1,6 +1,15 @@
 import React from "react";
 
-function ProductCard({ id, name, categories, price, image, rating }) {
+
+function ProductCard({
+  id,
+  name,
+  categories,
+  price,
+  image,
+  rating,
+  addProductToCart,
+}) {
   let Goldstars = rating;
   let greyStars = 5 - Goldstars;
   const stars = [
@@ -21,7 +30,11 @@ function ProductCard({ id, name, categories, price, image, rating }) {
                 <img
                   key={index}
                   className="size-2 sm:size-7"
-                  src={star === "gold" ? "src/assets/star-active.png" : "src/assets/star.png"}
+                  src={
+                    star === "gold"
+                      ? "src/assets/star-active.png"
+                      : "src/assets/star.png"
+                  }
                   alt="star"
                 />
               ))}
@@ -34,11 +47,16 @@ function ProductCard({ id, name, categories, price, image, rating }) {
           Buy Now
         </button>
         <div className="w-[0.1vw] h-full bg-black "></div>
-        <button className="text-center w-1/2 h-full text-[1.01vh] pl-[0.21vh] pt-0 sm:p-0 sm:text-lg">
+        <button
+          onClick={()=>{
+            addProductToCart(id,1)}}
+          className="text-center w-1/2 h-full text-[1.01vh] pl-[0.21vh] pt-0 sm:p-0 sm:text-lg"
+        >
           Add to Cart
         </button>
       </div>
     </div>
   );
 }
+
 export default ProductCard;

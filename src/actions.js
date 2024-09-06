@@ -10,97 +10,107 @@ export function asyncGetProducts() {
     try {
       // Placeholder array of products
       const placeholderProducts = [
-        {
-          id: 1,
-          name: "Plant A",
-          price: 19.99,
-          rating: 3,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 2,
-          name: "Plant B",
-          price: 29.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 3,
-          name: "Plant C",
-          price: 15.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 4,
-          name: "Plant D",
-          price: 25.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        
-        },
-        {
-          id: 5,
-          name: "Plant E",
-          price: 19.99,
-          rating: 3,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 6,
-          name: "Plant F",
-          price: 29.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 7,
-          name: "Plant G",
-          price: 15.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 8,
-          name: "Plant H",
-          price: 25.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        
-        },
-        
-        {
-          id: 9,
-          name: "Plant I",
-          price: 19.99,
-          rating: 3,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 10,
-          name: "Plant J",
-          price: 29.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 11,
-          name: "Plant K",
-          price: 15.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        },
-        {
-          id: 12,
-          name: "Plant L",
-          price: 25.99,
-          rating: 4,
-          image: "src/assets/aloe.webp",
-        
-        },
+
+          {
+            id: 1,
+            name: "Plant A",
+            price: 19.99,
+            rating: 3,
+            image: "src/assets/aloe.webp",
+            categories: ["Indoor", "Succulent"],
+          },
+          {
+            id: 2,
+            name: "Plant B",
+            price: 29.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Outdoor"],
+          },
+          {
+            id: 3,
+            name: "Plant C",
+            price: 15.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Succulent"],
+          },
+          {
+            id: 4,
+            name: "Plant D",
+            price: 25.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Indoor", "Flowering"],
+          },
+          {
+            id: 5,
+            name: "Plant E",
+            price: 19.99,
+            rating: 3,
+            image: "src/assets/aloe.webp",
+            categories: ["Outdoor", "Cactus"],
+          },
+          {
+            id: 6,
+            name: "Plant F",
+            price: 29.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Indoor"],
+          },
+          {
+            id: 7,
+            name: "Plant G",
+            price: 15.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Succulent", "Flowering"],
+          },
+          {
+            id: 8,
+            name: "Plant H",
+            price: 25.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Cactus"],
+          },
+          {
+            id: 9,
+            name: "Plant I",
+            price: 19.99,
+            rating: 3,
+            image: "src/assets/aloe.webp",
+            categories: ["Indoor"],
+          },
+          {
+            id: 10,
+            name: "Plant J",
+            price: 29.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Outdoor", "Succulent"],
+          },
+          {
+            id: 11,
+            name: "Plant K",
+            price: 15.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Flowering"],
+          },
+          {
+            id: 12,
+            name: "Plant L",
+            price: 25.99,
+            rating: 4,
+            image: "src/assets/aloe.webp",
+            categories: ["Cactus", "Indoor"],
+          },
+        ];
         
 
-      ];
+
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -124,19 +134,14 @@ export function asyncGetProducts() {
 //   };
 // }
 
-// //add to cart actions
-// export function addToCart(prod) {
-//   return {
-//     type: "ADD_TO_CART",
-//     payload: prod,
-//   };
-// }
-// export function addToCartFailure(error) {
-//   return {
-//     type: "ADD_TO_CART_FAILURE",
-//     error: error,
-//   };
-// }
+//add to cart actions
+export const addToCart = (prod) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: prod,
+  };
+}
+
 // export function asyncAddtocart(prod) {
 //   return async (dispatch) => {
 //     (dispatch) => {

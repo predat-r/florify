@@ -12,7 +12,7 @@ import PageSelector from "../components/pageSelector";
 
 function Home({ products, getProducts }) {
   const [productList, setProductList] = useState([]);
-  const CardsPerPage = 6;
+  const CardsPerPage = 4;
   const [ThispageProducts, setThisPageProducts] = useState([]);
   const [numOfPages, setnumOfPages] = useState(0);
   const [numOfProducts, setnumOfProducts] = useState(0);
@@ -50,7 +50,7 @@ function Home({ products, getProducts }) {
   }, []);
 
   return loaded ? (
-    <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll">
+    <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">

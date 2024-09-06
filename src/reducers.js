@@ -1,21 +1,17 @@
 import { combineReducers } from "redux";
+const cartReducer = (state = { cart: [], error: null }, action) => {
 
-function cartReducer(state = { cart: [], error: "no" }, action) {
   switch (action.type) {
     case "ADD_TO_CART":
-      //DATABASE UPDATING FROM MIDDLEWARE ? THEN WHO UPDATES STORE ?
       return {
-        ...state,
         cart: [...state.cart, action.payload],
       };
     case "ADD_TO_CART_FAILURE":
       return {
-        ...state,
         error: action.error,
       };
     case "REMOVE_FROM_CART":
       return {
-        ...state,
         cart: state.cart.filter((element) => element.id !== action.payload),
       };
       break;
@@ -24,7 +20,8 @@ function cartReducer(state = { cart: [], error: "no" }, action) {
       break;
   }
 }
-function userReducer(state = { users: [], error: null }, action) {
+const userReducer= (state = { users: [], error: null }, action)=> {
+
   switch (action.type) {
     case "CREATE_USER":
       return { ...state, users: [...state.users, action.payload] };
@@ -44,7 +41,7 @@ function userReducer(state = { users: [], error: null }, action) {
       break;
   }
 }
-function productReducer(state = { products: [], error: null }, action) {
+const productReducer= (state = { products: [], error: null }, action) => {
   switch (action.type) {
     case "SET_PRODUCTS":
       return {
