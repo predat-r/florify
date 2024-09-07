@@ -9,6 +9,7 @@ import { useState } from "react";
 import { mirage } from "ldrs";
 import { asyncGetProducts } from "../actions";
 import PageSelector from "../components/pageSelector";
+import MenuBox from "../components/MenuBox";
 
 function Home({ products, getProducts }) {
   const [productList, setProductList] = useState([]);
@@ -18,6 +19,8 @@ function Home({ products, getProducts }) {
   const [numOfProducts, setnumOfProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [unFilteredList, setUnfilteredList] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [ShowMenu, setShowMenu] = useState(false);
   mirage.register();
   const [loaded, setLoaded] = useState(false);
 
@@ -70,6 +73,9 @@ function Home({ products, getProducts }) {
         break;
     }
   };
+  const displayMenuBox = () => {
+    ShowMenu ? setShowMenu(false) : setShowMenu(true);
+  };
   const filterResultsByCategory = (filterCategory) => {
     const filteredList = unFilteredList.filter((element) =>
       element.categories.some(
@@ -86,10 +92,14 @@ function Home({ products, getProducts }) {
   };
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
-      <Navbar></Navbar>
+      <Navbar displayMenu={displayMenuBox}></Navbar>
+      {ShowMenu ? <MenuBox loggedIn={loggedIn}></MenuBox> : null}
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">
-        <Sidebar filterResultsByCategory={filterResultsByCategory} filterResultsByPrice={filterResultsByPrice}></Sidebar>
+        <Sidebar
+          filterResultsByCategory={filterResultsByCategory}
+          filterResultsByPrice={filterResultsByPrice}
+        ></Sidebar>
         <div className=" w-full flex flex-col">
           <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pr-9 pt-0 justify-between">
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>

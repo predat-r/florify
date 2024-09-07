@@ -1,28 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CardItemCount from "./CardItemCount";
-function Navbar() {
+function Navbar({ displayMenu }) {
   return (
     <div className="flex flex-row bg-bars w-full h-16 rounded-lg justify-between p-5 shadow-elevate  mb-5 items-center ">
       <Link to="/Cart">
-        {" "}
-        <button className="relative flex flex-col  w-10 h-10">
+        <button className="relative flex flex-col justify-center items-center w-10 h-10">
           <div className=" size-5 sm:size-9">
             <img src="src/assets/carticon-white.png"></img>
           </div>
           <CardItemCount></CardItemCount>
         </button>
       </Link>
-      <h1 className="text-lg sm:text-3xl font-bold text-white ml-9">
-        {" "}
-        Florify 🌱
+      <h1 className="text-lg sm:text-3xl  flex flex-row font-bold justify-center items-center text-white ml-9">
+        Florify
+        <img
+          className=" ml-1 md:ml-2 mb-1 size-8 md:size-12"
+          src="src/assets/icon.png"
+        ></img>
       </h1>
       <div className="flex flex-row justify-center sm:justify-between w-32  items-center">
         <img
-          className="size-4 mr-2 sm:mr-0 sm:size-5 "
+          onClick={displayMenu}
+          className="size-4 mr-2 sm:mr-0  cursor-pointer sm:size-5 "
           src="src/assets/user.png"
         ></img>
-        <h1 className="text-white text-sm sm:text-md">Haris naeem</h1>
+        <h1
+          onClick={displayMenu}
+          className=" cursor-pointer text-white text-sm sm:text-md"
+        >
+          Haris naeem
+        </h1>
       </div>
     </div>
   );
