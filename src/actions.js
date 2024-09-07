@@ -10,104 +10,103 @@ export function asyncGetProducts() {
     try {
       // Placeholder array of products
       const placeholderProducts = [
-
-          {
-            id: 1,
-            name: "Plant A",
-            price: 19.99,
-            rating: 3,
-            image: "src/assets/snake-plant.webp",
-            categories: ["Indoor", "Succulent"],
-          },
-          {
-            id: 2,
-            name: "Plant B",
-            price: 29.99,
-            rating: 4,
-            image: "src/assets/peperomia.webp",
-            categories: ["Outdoor"],
-          },
-          {
-            id: 3,
-            name: "Plant C",
-            price: 15.99,
-            rating: 4,
-            image: "src/assets/chinese-evergreen.webp",
-            categories: ["Succulent"],
-          },
-          {
-            id: 4,
-            name: "Plant D",
-            price: 25.99,
-            rating: 4,
-            image: "src/assets/grape-ivy.webp",
-            categories: ["Indoor", "Flowering"],
-          },
-          {
-            id: 5,
-            name: "Plant E",
-            price: 19.99,
-            rating: 3,
-            image: "src/assets/aloe.webp",
-            categories: ["Outdoor", "Cactus"],
-          },
-          {
-            id: 6,
-            name: "Plant F",
-            price: 29.99,
-            rating: 4,
-            image: "src/assets/dieffenbachia.webp",
-            categories: ["Indoor"],
-          },
-          {
-            id: 7,
-            name: "Plant G",
-            price: 15.99,
-            rating: 4,
-            image: "src/assets/aloe.webp",
-            categories: ["Succulent", "Flowering"],
-          },
-          {
-            id: 8,
-            name: "Plant H",
-            price: 25.99,
-            rating: 4,
-            image: "src/assets/aloe.webp",
-            categories: ["Cactus"],
-          },
-          {
-            id: 9,
-            name: "Plant I",
-            price: 19.99,
-            rating: 3,
-            image: "src/assets/aloe.webp",
-            categories: ["Indoor"],
-          },
-          {
-            id: 10,
-            name: "Plant J",
-            price: 29.99,
-            rating: 4,
-            image: "src/assets/aloe.webp",
-            categories: ["Outdoor", "Succulent"],
-          },
-          {
-            id: 11,
-            name: "Plant K",
-            price: 15.99,
-            rating: 4,
-            image: "src/assets/aloe.webp",
-            categories: ["Flowering"],
-          },
-          {
-            id: 12,
-            name: "Plant L",
-            price: 25.99,
-            rating: 4,
-            image: "src/assets/aloe.webp",
-            categories: ["Cactus", "Indoor"],
-          },
-        ];
+        {
+          id: 1,
+          name: "Plant A",
+          price: 19.99,
+          rating: 3,
+          image: "src/assets/snake-plant.webp",
+          categories: ["Indoor", "Succulent"],
+        },
+        {
+          id: 2,
+          name: "Plant B",
+          price: 29.99,
+          rating: 4,
+          image: "src/assets/peperomia.webp",
+          categories: ["Outdoor"],
+        },
+        {
+          id: 3,
+          name: "Plant C",
+          price: 15.99,
+          rating: 4,
+          image: "src/assets/chinese-evergreen.webp",
+          categories: ["Succulent"],
+        },
+        {
+          id: 4,
+          name: "Plant D",
+          price: 25.99,
+          rating: 4,
+          image: "src/assets/grape-ivy.webp",
+          categories: ["Indoor", "Flowering"],
+        },
+        {
+          id: 5,
+          name: "Plant E",
+          price: 19.99,
+          rating: 3,
+          image: "src/assets/aloe.webp",
+          categories: ["Outdoor", "Cactus"],
+        },
+        {
+          id: 6,
+          name: "Plant F",
+          price: 29.99,
+          rating: 4,
+          image: "src/assets/dieffenbachia.webp",
+          categories: ["Indoor"],
+        },
+        {
+          id: 7,
+          name: "Plant G",
+          price: 15.99,
+          rating: 4,
+          image: "src/assets/aloe.webp",
+          categories: ["Succulent", "Flowering"],
+        },
+        {
+          id: 8,
+          name: "Plant H",
+          price: 25.99,
+          rating: 4,
+          image: "src/assets/aloe.webp",
+          categories: ["Cactus"],
+        },
+        {
+          id: 9,
+          name: "Plant I",
+          price: 19.99,
+          rating: 3,
+          image: "src/assets/aloe.webp",
+          categories: ["Indoor"],
+        },
+        {
+          id: 10,
+          name: "Plant J",
+          price: 29.99,
+          rating: 4,
+          image: "src/assets/aloe.webp",
+          categories: ["Outdoor", "Succulent"],
+        },
+        {
+          id: 11,
+          name: "Plant K",
+          price: 15.99,
+          rating: 4,
+          image: "src/assets/aloe.webp",
+          categories: ["Flowering"],
+        },
+        {
+          id: 12,
+          name: "Plant L",
+          price: 25.99,
+          rating: 4,
+          image: "src/assets/aloe.webp",
+          categories: ["Cactus", "Indoor"],
+        },
+      ];
 
       dispatch(getProducts(placeholderProducts));
     } catch (error) {
@@ -135,8 +134,13 @@ export const addToCart = (prod) => {
     type: "ADD_TO_CART",
     payload: prod,
   };
-}
-
+};
+export const removeFromCart = (id) => {
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: id,
+  };
+};
 // export function asyncAddtocart(prod) {
 //   return async (dispatch) => {
 //     (dispatch) => {

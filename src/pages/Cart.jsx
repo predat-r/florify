@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import CartCard from "../components/CartCard";
 import { connect } from "react-redux";
 import CheckoutBtn from "../components/CheckoutBtn";
-function Cart({ productcart }) {
+import { removeFromCart } from "../actions";
+function Cart({ productcart, removeFromCart }) {
   const [cart, setCart] = useState(productcart);
   const cartLength = cart.length;
   const [TotalAmount, setTotalAmount] = useState(0);
@@ -22,7 +23,6 @@ function Cart({ productcart }) {
     let newTotal = 0;
     cart.forEach((element) => {
       newTotal = newTotal + element.Quantity * element.price;
-      
     });
     newTotal = newTotal.toFixed(2);
     setTotalAmount(parseFloat(newTotal));
@@ -35,6 +35,9 @@ function Cart({ productcart }) {
   };
   const decreaseQuantity = (id) => {
     const Product = cart.find((product) => product.id === id);
+    if (Product.Quantity === 1) {
+      removeFromCart(id);
+    }
     updateQuantity(id, -1);
   };
 
@@ -62,10 +65,10 @@ function Cart({ productcart }) {
       {cart.length > 0 ? (
         <div className=" flex justify-end flex-row">
           <div className=" w-3/4 sm:w-2/4 p-3 sm:p-5  h-full flex flex-row justify-between items-center">
-          <h1 className=" text-md sm:ml-10 sm:text-xl text-bars font-bold ">
-            Subtotal : ${TotalAmount}
-          </h1>
-          <CheckoutBtn></CheckoutBtn>
+            <h1 className=" text-md sm:ml-10 sm:text-xl text-bars font-bold ">
+              Subtotal : ${TotalAmount}
+            </h1>
+            <CheckoutBtn></CheckoutBtn>
           </div>
         </div>
       ) : null}
@@ -75,4 +78,7 @@ function Cart({ productcart }) {
 const mapStateToprops = (state) => ({
   productcart: state.cart.cart,
 });
-export default connect(mapStateToprops, null)(Cart);
+const mapDispatchToProps = (dispatch) => ({
+  removeFromCart: (id) => dispatch(removeFromCart(id)),
+});
+export default connect(mapStateToprops, mapDispatchToProps)(Cart);
