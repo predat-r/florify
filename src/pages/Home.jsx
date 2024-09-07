@@ -70,11 +70,17 @@ function Home({ products, getProducts }) {
         break;
     }
   };
-  const filterResults = (filterCategory) => {
+  const filterResultsByCategory = (filterCategory) => {
     const filteredList = unFilteredList.filter((element) =>
       element.categories.some(
         (category) => category.toLowerCase() === filterCategory.toLowerCase()
       )
+    );
+    setProductList(filteredList);
+  };
+  const filterResultsByPrice = (min, max) => {
+    const filteredList = unFilteredList.filter(
+      (element) => element.price >= min && element.price <= max
     );
     setProductList(filteredList);
   };
@@ -83,7 +89,7 @@ function Home({ products, getProducts }) {
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">
-        <Sidebar filterResults={filterResults}></Sidebar>
+        <Sidebar filterResultsByCategory={filterResultsByCategory} filterResultsByPrice={filterResultsByPrice}></Sidebar>
         <div className=" w-full flex flex-col">
           <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pr-9 pt-0 justify-between">
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>
