@@ -35,5 +35,4 @@ function Navbar({ displayMenu }) {
     </div>
   );
 }
-
 export default Navbar;

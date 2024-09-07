@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 function MenuBox({ loggedIn }) {
   if (loggedIn) {
     return (
@@ -10,7 +12,7 @@ function MenuBox({ loggedIn }) {
           Log out
         </button>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
-          View Cart
+            <Link to={"/Cart"}>View Cart</Link>
         </button>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
           Settings
@@ -24,7 +26,7 @@ function MenuBox({ loggedIn }) {
           Create an account to avail exlusive discounts
         </h1>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
-         Sign up
+          Sign up
         </button>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
           Log in
