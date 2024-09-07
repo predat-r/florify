@@ -6,13 +6,13 @@ import ProductContainer from "../components/ProductContainer";
 import SortingBtn from "../components/SortingBtn";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { mirage } from "ldrs";
+import { cardio, mirage } from "ldrs";
 import { asyncGetProducts } from "../actions";
 import PageSelector from "../components/pageSelector";
 
 function Home({ products, getProducts }) {
   const [productList, setProductList] = useState([]);
-  const CardsPerPage = 4;
+  const CardsPerPage = 25;
   const [ThispageProducts, setThisPageProducts] = useState([]);
   const [numOfPages, setnumOfPages] = useState(0);
   const [numOfProducts, setnumOfProducts] = useState(0);
@@ -22,12 +22,14 @@ function Home({ products, getProducts }) {
 
   useEffect(() => {
     if (products.products[0] && products.products[0].length > 0) {
-
       setProductList(products.products[0]);
-      setThisPageProducts(products.products[0].slice(0, CardsPerPage));
+
       setLoaded(true);
     }
   }, [products]);
+  useEffect(() => {
+    setThisPageProducts(productList.slice(0, CardsPerPage));
+  }, [productList]);
   useEffect(() => {
     setnumOfProducts(productList.length);
   }, [productList]);
@@ -39,16 +41,35 @@ function Home({ products, getProducts }) {
     const endIndex = startIndex + CardsPerPage;
     // Update the products for the current page
     if (loaded) {
-
       setThisPageProducts(productList.slice(startIndex, endIndex));
     }
-  }, [currentPage]);
+  }, [currentPage, productList]);
   useEffect(() => {
     if (!loaded) {
       getProducts();
     }
   }, []);
+  const sortProducts = (sortBy) => {
+    let sortedList = [...productList];
 
+    switch (sortBy) {
+      case "1":
+        getProducts();
+        break;
+      case "2":
+
+        sortedList.sort((a, b) => a.price - b.price);
+        setProductList(sortedList);
+        break;
+      case "3":
+
+        sortedList.sort((a, b) => b.price - a.price);
+        setProductList(sortedList);
+      default:
+        break;
+    }
+
+  };
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar></Navbar>
@@ -58,7 +79,7 @@ function Home({ products, getProducts }) {
         <div className="flex flex-col">
           <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pt-0 justify-between">
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>
-            <SortingBtn></SortingBtn>
+            <SortingBtn sortResults={sortProducts}></SortingBtn>
           </div>
           <div className="flex flex-col justify-center items-center  w-full pb-8 box-border mb-10 flex-shrink-0 ">
             <ProductContainer products={ThispageProducts}></ProductContainer>

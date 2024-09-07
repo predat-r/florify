@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function SortingBtn() {
+function SortingBtn({ sortResults }) {
   return (
-   <button className='bg-[#9AE5C9] w-20 text-xs sm:text-lg sm:w-40 h-full rounded-md text-bars mr-none sm:mr-4'>Sort Results</button>
-  )
+    <select
+      onChange={(event) => sortResults(event.target.value)}
+      className=" text-center  appearance-none bg-[#9AE5C9] w-20 text-xs focus:appearance-none outline-none border-none sm:text-lg sm:w-40 h-full rounded-md text-bars mr-none sm:mr-4"
+    >
+      <option>Sort Results</option>
+      <option value={1}>Relevance</option>
+      <option value={2}>Price Low-High</option>
+      <option value={3}>Price High-Low</option>
+    </select>
+  );
 }
 
-export default SortingBtn
+export default SortingBtn;
