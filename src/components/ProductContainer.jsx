@@ -39,7 +39,9 @@ function ProductContainer({ products, addProductToCart }) {
             />
           ))
         ) : (
-          <p>No products available.</p> // Fallback message if productList is empty
+          <div className="h-2/5 w-2/3 absolute flex items-center justify-center">
+          <p className="text-bars font-bold text-3xl ">No products available :(</p> 
+           </div>
         )}
       </div>
       {addedProductToCart ? (

@@ -6,7 +6,7 @@ import ProductContainer from "../components/ProductContainer";
 import SortingBtn from "../components/SortingBtn";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { cardio, mirage } from "ldrs";
+import { mirage } from "ldrs";
 import { asyncGetProducts } from "../actions";
 import PageSelector from "../components/pageSelector";
 
@@ -17,19 +17,22 @@ function Home({ products, getProducts }) {
   const [numOfPages, setnumOfPages] = useState(0);
   const [numOfProducts, setnumOfProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [unFilteredList, setUnfilteredList] = useState([]);
   mirage.register();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (products.products[0] && products.products[0].length > 0) {
       setProductList(products.products[0]);
-
       setLoaded(true);
     }
   }, [products]);
   useEffect(() => {
     setThisPageProducts(productList.slice(0, CardsPerPage));
   }, [productList]);
+  useEffect(() => {
+    setUnfilteredList(products.products[0]);
+  }, [products]);
   useEffect(() => {
     setnumOfProducts(productList.length);
   }, [productList]);
@@ -57,27 +60,32 @@ function Home({ products, getProducts }) {
         getProducts();
         break;
       case "2":
-
         sortedList.sort((a, b) => a.price - b.price);
         setProductList(sortedList);
         break;
       case "3":
-
         sortedList.sort((a, b) => b.price - a.price);
         setProductList(sortedList);
       default:
         break;
     }
-
+  };
+  const filterResults = (filterCategory) => {
+    const filteredList = unFilteredList.filter((element) =>
+      element.categories.some(
+        (category) => category.toLowerCase() === filterCategory.toLowerCase()
+      )
+    );
+    setProductList(filteredList);
   };
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">
-        <Sidebar></Sidebar>
-        <div className="flex flex-col">
-          <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pt-0 justify-between">
+        <Sidebar filterResults={filterResults}></Sidebar>
+        <div className=" w-full flex flex-col">
+          <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pr-9 pt-0 justify-between">
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>
             <SortingBtn sortResults={sortProducts}></SortingBtn>
           </div>
@@ -92,7 +100,7 @@ function Home({ products, getProducts }) {
       </div>
     </div>
   ) : (
-    <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll">
+    <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3">
