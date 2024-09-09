@@ -32,17 +32,32 @@ const cartReducer = (state = { cart: [], error: null }, action) => {
       break;
   }
 };
-const userReducer = (state = { users: [], error: null }, action) => {
+const userInitialState = {
+  firstName: "",
+  lastName: "",
+  emailOrphone:"",
+  password:"",
+  address:"",
+}
+const userReducer = (state = { user: userInitialState, error: null }, action) => {
   switch (action.type) {
     case "CREATE_USER":
-      return { ...state, users: [...state.users, action.payload] };
+      console.log(user);
+      return {
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          emailOrphone: action.payload.emailOrphone,
+          password: action.payload.password,
+          address: action.payload.address,
+        },
+      };
     case "CREATE_USER_ERROR":
       return { ...state, error: action.error };
     case "UPDATE_USER":
-      //user data updated then user object returned from backend
       return {
         ...state,
-        users: state.users.map((element) =>
+        users: state.user.map((element) =>
           element.id != action.payload.id ? element : action.payload
         ),
       };

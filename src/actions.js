@@ -141,6 +141,12 @@ export const removeFromCart = (id) => {
     payload: id,
   };
 };
+export const createUser = (user) => {
+  return {
+    type: "CREATE_USER",
+    payload: user,
+  };
+};
 // export function asyncAddtocart(prod) {
 //   return async (dispatch) => {
 //     (dispatch) => {

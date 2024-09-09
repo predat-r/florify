@@ -19,7 +19,7 @@ function Home({ products, getProducts }) {
   const [numOfProducts, setnumOfProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [unFilteredList, setUnfilteredList] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [ShowMenu, setShowMenu] = useState(false);
   mirage.register();
   const [loaded, setLoaded] = useState(false);
