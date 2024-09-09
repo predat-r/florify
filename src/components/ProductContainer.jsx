@@ -45,7 +45,7 @@ function ProductContainer({ products, addProductToCart }) {
         )}
       </div>
       {addedProductToCart ? (
-        <PopUp setAddedProductToCart={setAddedProductToCart}></PopUp>
+        <PopUp Condition={setAddedProductToCart} Label={"Product added to Cart"}></PopUp>
       ) : null}
     </>
   );

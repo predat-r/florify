@@ -4,6 +4,7 @@ import MenuBox from "../components/MenuBox";
 import InputField from "../components/InputField";
 import { createUser } from "../actions";
 import { connect } from "react-redux";
+import PopUp from "../components/PopUp";
 function SignUp({createUser}) {
   const FName = useRef();
   const LName = useRef();
@@ -13,11 +14,14 @@ function SignUp({createUser}) {
   const Address = useRef();
   const [ShowMenu, setShowMenu] = useState(false);
   const [Error, setError] = useState(false);
+  const [showPopUp,setShowPopup] = useState(false);
   const displayMenuBox = () => {
     ShowMenu ? setShowMenu(false) : setShowMenu(true);
+
   };
   const SignUp = () => {
     if (Password.current.value === Password2.current.value) {
+      setError(false);
         createUser({
             firstName : FName.current.value,
             lastName : LName.current.value,
@@ -25,6 +29,7 @@ function SignUp({createUser}) {
             password : Password.current.value,
             address : Address.current.value,
         });
+        setShowPopup(true);
     } else {
       alert("Passwords do not match");
       highlightField();
@@ -36,7 +41,8 @@ function SignUp({createUser}) {
   return (
     <div className=" h-screen w-screen flex flex-col pl-2 md:pl-5 pr-2 md:pr-5 pt-2 md:pt-5 bg-background">
       <Navbar displayMenu={displayMenuBox}></Navbar>
-      {ShowMenu ? <MenuBox loggedIn={false}></MenuBox> : null}
+      {ShowMenu ? <MenuBox ></MenuBox> : null}
+      {showPopUp?<PopUp Condition={setShowPopup} Label={"Sign Up Successful"} ></PopUp>:null}
       <div className="bg-bars h-full w-full md:mt-5 rounded-xl p-2 md:p-5 shadow-elevateLow">
         <div className="bg-background rounded-lg pt-2 h-full w-full flex flex-col items-center ">
           <InputField

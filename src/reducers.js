@@ -38,11 +38,13 @@ const userInitialState = {
   emailOrphone:"",
   password:"",
   address:"",
+  LoggedIn:false,
+
 }
-const userReducer = (state = { user: userInitialState, error: null }, action) => {
+const userReducer = (state = { user: userInitialState, error: null },action) => {
   switch (action.type) {
     case "CREATE_USER":
-      console.log(user);
+      console.log(state);
       return {
         user: {
           firstName: action.payload.firstName,
@@ -50,7 +52,9 @@ const userReducer = (state = { user: userInitialState, error: null }, action) =>
           emailOrphone: action.payload.emailOrphone,
           password: action.payload.password,
           address: action.payload.address,
+          LoggedIn:true,
         },
+
       };
     case "CREATE_USER_ERROR":
       return { ...state, error: action.error };

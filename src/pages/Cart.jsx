@@ -4,10 +4,12 @@ import CartCard from "../components/CartCard";
 import { connect } from "react-redux";
 import CheckoutBtn from "../components/CheckoutBtn";
 import { removeFromCart } from "../actions";
+import MenuBox from "../components/MenuBox";
 function Cart({ productcart, removeFromCart }) {
   const [cart, setCart] = useState(productcart);
   const cartLength = cart.length;
   const [TotalAmount, setTotalAmount] = useState(0);
+  const [ShowMenu, setShowMenu] = useState(false);
   const updateQuantity = (id, amount) => {
     const newCart = cart
       .map((product) => {
@@ -40,10 +42,13 @@ function Cart({ productcart, removeFromCart }) {
     }
     updateQuantity(id, -1);
   };
-
+  const displayMenuBox = () => {
+    ShowMenu ? setShowMenu(false) : setShowMenu(true);
+  };
   return (
     <div className="w-screen p-3 md:p-5 h-screen flex flex-col bg-background overflow-scroll">
-      <Navbar></Navbar>
+      <Navbar displayMenu={displayMenuBox}></Navbar>
+      {ShowMenu ? <MenuBox /> : null}
       <h1 className="font-inter text-xl md:text-3xl mt-5 text-bars font-bold mb-5 ">
         {cartLength > 0
           ? cartLength + ` item${cartLength > 1 ? "s" : ""} in cart`

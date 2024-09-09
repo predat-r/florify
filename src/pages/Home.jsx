@@ -10,8 +10,9 @@ import { mirage } from "ldrs";
 import { asyncGetProducts } from "../actions";
 import PageSelector from "../components/pageSelector";
 import MenuBox from "../components/MenuBox";
+import PopUp from "../components/PopUp";
 
-function Home({ products, getProducts }) {
+function Home({ products, getProducts, username, LoggedIn }) {
   const [productList, setProductList] = useState([]);
   const CardsPerPage = 25;
   const [ThispageProducts, setThisPageProducts] = useState([]);
@@ -19,8 +20,8 @@ function Home({ products, getProducts }) {
   const [numOfProducts, setnumOfProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [unFilteredList, setUnfilteredList] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [ShowMenu, setShowMenu] = useState(false);
+  const [ShowPopUp, setShowPopup] = useState(false);
   mirage.register();
   const [loaded, setLoaded] = useState(false);
 
@@ -76,6 +77,13 @@ function Home({ products, getProducts }) {
   const displayMenuBox = () => {
     ShowMenu ? setShowMenu(false) : setShowMenu(true);
   };
+  const showWelcomeMessage = () => {
+    if (LoggedIn) setShowPopup(true);
+  };
+  useEffect(() => {
+    showWelcomeMessage();
+  }, [LoggedIn]);
+
   const filterResultsByCategory = (filterCategory) => {
     const filteredList = unFilteredList.filter((element) =>
       element.categories.some(
@@ -93,7 +101,13 @@ function Home({ products, getProducts }) {
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar displayMenu={displayMenuBox}></Navbar>
-      {ShowMenu ? <MenuBox loggedIn={loggedIn}></MenuBox> : null}
+      {ShowMenu ? <MenuBox onClick={null} /> : null}
+      {LoggedIn ? (
+        <PopUp
+          Condition={setShowPopup}
+          Label={`Welcome back ${username}`}
+        ></PopUp>
+      ) : null}
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">
         <Sidebar
@@ -101,7 +115,7 @@ function Home({ products, getProducts }) {
           filterResultsByPrice={filterResultsByPrice}
         ></Sidebar>
         <div className=" w-full flex flex-col">
-          <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 pr-9 pt-0 justify-between">
+          <div className="flex flex-row w-full h-10 ml-3 mr-3 p-2 md:pr-9 pt-0 justify-between">
             <h1 className="text-lg font-bold text-bars ml-4">Popular</h1>
             <SortingBtn sortResults={sortProducts}></SortingBtn>
           </div>
@@ -136,6 +150,8 @@ function Home({ products, getProducts }) {
 }
 const mapStateToProps = (state) => ({
   products: state.products,
+  username: state.user.user.firstName,
+  LoggedIn: state.user.user.LoggedIn,
 });
 const mapdispatchToprops = (dispatch) => ({
   getProducts: () => dispatch(asyncGetProducts()),

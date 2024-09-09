@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CardItemCount from "./CardItemCount";
-function Navbar({ displayMenu }) {
+import { connect } from "react-redux";
+
+function Navbar({ username,loggedIn, displayMenu }) {
+
   return (
     <div className="flex flex-row bg-bars w-full h-16 rounded-lg justify-between p-5 shadow-elevate  mb-5 items-center ">
       <Link to="/Cart">
@@ -19,7 +22,7 @@ function Navbar({ displayMenu }) {
           src="src/assets/icon.png"
         ></img>
       </h1>
-      <div className="flex flex-row justify-center sm:justify-between w-32  items-center">
+      <div className="flex flex-row justify-center sm:justify-around w-32  items-center">
         <img
           onClick={displayMenu}
           className="size-4 mr-2 sm:mr-0  cursor-pointer sm:size-5 "
@@ -28,11 +31,16 @@ function Navbar({ displayMenu }) {
         <h1
           onClick={displayMenu}
           className=" cursor-pointer text-white text-sm sm:text-md"
-        >
-          Haris naeem
+        >{loggedIn?username:"Sign Up"}
         </h1>
       </div>
     </div>
   );
 }
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    username: state.user.user.firstName + " " + state.user.user.lastName,
+    loggedIn:state.user.user.LoggedIn
+  };
+};
+export default connect(mapStateToProps, null)(Navbar);
