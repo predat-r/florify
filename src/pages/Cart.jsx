@@ -49,7 +49,7 @@ function Cart({ productcart, removeFromCart }) {
     <div className="w-screen p-3 md:p-5 h-screen flex flex-col bg-background overflow-scroll">
       <Navbar displayMenu={displayMenuBox}></Navbar>
       {ShowMenu ? <MenuBox /> : null}
-      <h1 className="font-inter text-xl md:text-3xl mt-5 text-bars font-bold mb-5 ">
+      <h1 className="font-inter text-xl md:text-3xl mt-5  text-bars font-bold mb-5 ">
         {cartLength > 0
           ? cartLength + ` item${cartLength > 1 ? "s" : ""} in cart`
           : "Cart is Empty :("}
