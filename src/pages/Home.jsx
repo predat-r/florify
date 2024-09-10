@@ -11,6 +11,7 @@ import { asyncGetProducts } from "../actions";
 import PageSelector from "../components/pageSelector";
 import MenuBox from "../components/MenuBox";
 import PopUp from "../components/PopUp";
+import { useLocation } from "react-router-dom";
 
 function Home({ products, getProducts, username, LoggedIn }) {
   const [productList, setProductList] = useState([]);
@@ -21,7 +22,9 @@ function Home({ products, getProducts, username, LoggedIn }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [unFilteredList, setUnfilteredList] = useState([]);
   const [ShowMenu, setShowMenu] = useState(false);
-  const [ShowPopUp, setShowPopup] = useState(false);
+  const [WelcomeBack, setWelcomeBack] = useState(false);
+  const [Welcome, setWelcome] = useState(false);
+  const Location = useLocation();
   mirage.register();
   const [loaded, setLoaded] = useState(false);
 
@@ -77,12 +80,11 @@ function Home({ products, getProducts, username, LoggedIn }) {
   const displayMenuBox = () => {
     ShowMenu ? setShowMenu(false) : setShowMenu(true);
   };
+
   const showWelcomeMessage = () => {
-    if (LoggedIn) setShowPopup(true);
+    if (Location.pathname.includes("WelcomeBack")) setWelcomeBack(true);
+    else if (Location.pathname.includes("Welcome")) setWelcome(true);
   };
-  useEffect(() => {
-    showWelcomeMessage();
-  }, [LoggedIn]);
 
   const filterResultsByCategory = (filterCategory) => {
     const filteredList = unFilteredList.filter((element) =>
@@ -98,15 +100,22 @@ function Home({ products, getProducts, username, LoggedIn }) {
     );
     setProductList(filteredList);
   };
+  useEffect(() => {
+    showWelcomeMessage();
+  }, [LoggedIn]);
   return loaded ? (
     <div className=" h-screen w-screen font-inter bg-background flex flex-col items-center pt-5 pl-5 pr-5 overflow-scroll relative">
       <Navbar displayMenu={displayMenuBox}></Navbar>
       {ShowMenu ? <MenuBox onClick={null} /> : null}
       {LoggedIn ? (
-        <PopUp
-          Condition={setShowPopup}
-          Label={`Welcome back ${username}`}
-        ></PopUp>
+        WelcomeBack ? (
+          <PopUp
+            Condition={setWelcomeBack}
+            Label={`Welcome back ${username}`}
+          ></PopUp>
+        ) : Welcome ? (
+          <PopUp Condition={setWelcome} Label={`Welcome To Florify`}></PopUp>
+        ) : null
       ) : null}
       <SearchBar></SearchBar>
       <div className="w-full h-full flex flex-row text-white mt-10 sm:mt-20 pl-1 sm:pl-3 pr-3 pt-3 ">

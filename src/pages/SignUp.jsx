@@ -5,6 +5,8 @@ import InputField from "../components/InputField";
 import { createUser } from "../actions";
 import { connect } from "react-redux";
 import PopUp from "../components/PopUp";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 function SignUp({createUser}) {
   const FName = useRef();
   const LName = useRef();
@@ -15,6 +17,7 @@ function SignUp({createUser}) {
   const [ShowMenu, setShowMenu] = useState(false);
   const [Error, setError] = useState(false);
   const [showPopUp,setShowPopup] = useState(false);
+  const navigate = useNavigate();
   const displayMenuBox = () => {
     ShowMenu ? setShowMenu(false) : setShowMenu(true);
 
@@ -30,6 +33,8 @@ function SignUp({createUser}) {
             address : Address.current.value,
         });
         setShowPopup(true);
+        navigate("/Welcome");
+        
     } else {
       alert("Passwords do not match");
       highlightField();
@@ -85,8 +90,9 @@ function SignUp({createUser}) {
             label={"Full Address"}
           ></InputField>
           <div className="flex mt-6 sm:mt-3  lg:mt-10 flex-col justify-center items-center space-y-8">
-            <button className=" w-44 h-8 sm:w-44 md:w-64 sm:h-9 text-sm md:text-lg rounded-lg text-bars shadow-lg  bg-green1">
-              Add Billing Info
+            <button  className=" w-44 h-8 sm:w-44 md:w-64 sm:h-9 text-sm md:text-lg rounded-lg text-bars shadow-lg  bg-green1">
+            <Link to={"/BillingInfo"}> Add Billing Info </Link>
+              
             </button>
             <button
               onClick={SignUp}

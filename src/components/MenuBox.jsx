@@ -7,8 +7,9 @@ function MenuBox({ loggedIn }) {
     return (
       <div className="bg-bars font-inter flex flex-col justify-evenly items-center p-5 text-center rounded-xl  shadow-elevate w-2/5 sm:w-1/6 h-2/5 absolute right-5 top-24 z-30">
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
-          Profile
+          <Link to="/Profile"> Profile</Link>{" "}
         </button>
+
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
           Log out
         </button>
@@ -30,7 +31,7 @@ function MenuBox({ loggedIn }) {
           <Link to={"/SignUp"}>Sign up</Link>
         </button>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
-<Link to={"/LogIn"}>Log In</Link>
+          <Link to={"/LogIn"}>Log In</Link>
         </button>
       </div>
     );

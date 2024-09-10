@@ -33,18 +33,20 @@ const cartReducer = (state = { cart: [], error: null }, action) => {
   }
 };
 const userInitialState = {
-  firstName: "",
+  firstName: "haris",
   lastName: "",
-  emailOrphone:"",
-  password:"",
-  address:"",
-  LoggedIn:false,
-
-}
-const userReducer = (state = { user: userInitialState, error: null },action) => {
+  emailOrphone: "",
+  password: "",
+  address: "",
+  LoggedIn: false,
+};
+const userReducer = (
+  state = { user: userInitialState, error: null },
+  action
+) => {
   switch (action.type) {
+
     case "CREATE_USER":
-      console.log(state);
       return {
         user: {
           firstName: action.payload.firstName,
@@ -52,9 +54,8 @@ const userReducer = (state = { user: userInitialState, error: null },action) => 
           emailOrphone: action.payload.emailOrphone,
           password: action.payload.password,
           address: action.payload.address,
-          LoggedIn:true,
+          LoggedIn: true,
         },
-
       };
     case "CREATE_USER_ERROR":
       return { ...state, error: action.error };
@@ -65,6 +66,16 @@ const userReducer = (state = { user: userInitialState, error: null },action) => 
           element.id != action.payload.id ? element : action.payload
         ),
       };
+
+    case "LOGIN_USER":
+      return {
+        user:{
+          ...state.user,
+          emailOrphone:action.payload.emailOrphone,
+          password:action.payload.password,
+          LoggedIn:true,
+        },
+      }
       break;
     default:
       return state;

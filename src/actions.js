@@ -147,7 +147,12 @@ export const createUser = (user) => {
     payload: user,
   };
 };
-
+export const loginUser = (user) => {
+  return {
+    type: "LOGIN_USER",
+    payload: user,
+  };
+};
 // export function asyncAddtocart(prod) {
 //   return async (dispatch) => {
 //     (dispatch) => {

@@ -3,21 +3,23 @@ import Navbar from "../components/Navbar";
 import InputField from "../components/InputField";
 import { useRef } from "react";
 import MenuBox from "../components/MenuBox";
-import PopUp from "../components/PopUp";
+import { connect } from "react-redux";
 import { useNavigate, useNavigationType } from "react-router-dom";
-function LogIn() {
+import { loginUser } from "../actions";
+function LogIn({LoginUser}) {
   const EmailOrPhoneNo = useRef();
   const Password = useRef();
   const [ShowMenu,setShowMenu] = useState(false);
-  const [showPopUp,setShowPopup] = useState(false);
   const navigate = useNavigate();
   const displayMenu = () =>{ 
      ShowMenu?setShowMenu(false):setShowMenu(true);
   }
   const Login = ()=>{
-
-     
-      navigate("/Home");
+      LoginUser({
+        emailOrPhoneNo : EmailOrPhoneNo.current.value,
+        password : Password.current.value,
+      })
+      navigate("/WelcomeBack");
       
   }
   return (
@@ -53,5 +55,9 @@ function LogIn() {
     </div>
   );
 }
-
-export default LogIn;
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    LoginUser:(user)=>dispatch(loginUser(user)),
+  }
+}
+export  default connect(null,mapDispatchToProps)(LogIn);

@@ -4,7 +4,7 @@ function SortingBtn({ sortResults }) {
   return (
     <select
       onChange={(event) => sortResults(event.target.value)}
-      className=" flex flex-row justify-center items-center text-center  appearance-none bg-[#9AE5C9] w-20 text-xs focus:appearance-none outline-none border-none sm:text-lg sm:w-40 h-full rounded-md text-bars mr-none p-1 sm:mr-4"
+      className=" flex flex-row justify-center items-center text-center  appearance-none bg-[#9AE5C9] w-20 text-xs focus:appearance-none outline-none border-none sm:text-lg sm:w-40 h-full rounded-md text-bars mr-none pl-1 pr-1 pb-1 pt-0.5 sm:mr-4"
     >
       <option>Sort Results</option>
       <option value={1}>Relevance</option>
