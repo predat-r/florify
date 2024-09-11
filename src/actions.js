@@ -141,6 +141,18 @@ export const removeFromCart = (id) => {
     payload: id,
   };
 };
+export const incrementQuantity = (id) => {
+  return {
+    type: "INCREMENT_QUANTITY",
+    payload: id,
+  };
+};
+export const decrementQuantity = (id) => {
+  return {
+    type: "DECREMENT_QUANTITY",
+    payload: id,
+  };
+};
 export const createUser = (user) => {
   return {
     type: "CREATE_USER",
@@ -153,6 +165,12 @@ export const loginUser = (user) => {
     payload: user,
   };
 };
+export const logoutUser = () =>{
+  return {
+    type: "LOGOUT_USER",
+  };
+};
+
 // export function asyncAddtocart(prod) {
 //   return async (dispatch) => {
 //     (dispatch) => {

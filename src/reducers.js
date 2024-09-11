@@ -1,3 +1,4 @@
+
 import { combineReducers } from "redux";
 const cartReducer = (state = { cart: [], error: null }, action) => {
   switch (action.type) {
@@ -26,7 +27,20 @@ const cartReducer = (state = { cart: [], error: null }, action) => {
       return {
         cart: state.cart.filter((element) => element.id !== action.payload),
       };
-      break;
+    case "INCREMENT_QUANTITY":
+      return {
+        cart: {
+          ...state.cart,
+          Quantity: Quantity + 1,
+        },
+      };
+      case "DECREMENT_QUANTITY":
+        return {
+          cart: {
+            ...state.cart,
+            Quantity: Quantity - 1,
+          },
+        };
     default:
       return state;
       break;
@@ -44,8 +58,8 @@ const userReducer = (
   state = { user: userInitialState, error: null },
   action
 ) => {
+  console.log(state.user);
   switch (action.type) {
-
     case "CREATE_USER":
       return {
         user: {
@@ -69,14 +83,21 @@ const userReducer = (
 
     case "LOGIN_USER":
       return {
-        user:{
+        user: {
           ...state.user,
-          emailOrphone:action.payload.emailOrphone,
-          password:action.payload.password,
-          LoggedIn:true,
+          emailOrphone: action.payload.emailOrphone,
+          password: action.payload.password,
+          LoggedIn: true,
         },
-      }
-      break;
+      };
+      case "LOGOUT_USER":
+        return {
+          user:
+          { ...userInitialState,
+            LoggedIn:false,
+          },
+        };
+
     default:
       return state;
       break;

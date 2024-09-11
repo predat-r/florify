@@ -13,7 +13,7 @@ import MenuBox from "../components/MenuBox";
 import PopUp from "../components/PopUp";
 import { useLocation } from "react-router-dom";
 
-function Home({ products, getProducts, username, LoggedIn }) {
+function Home({ products, getProducts, username, LoggedIn,user }) {
   const [productList, setProductList] = useState([]);
   const CardsPerPage = 25;
   const [ThispageProducts, setThisPageProducts] = useState([]);
@@ -27,7 +27,6 @@ function Home({ products, getProducts, username, LoggedIn }) {
   const Location = useLocation();
   mirage.register();
   const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
     if (products.products[0] && products.products[0].length > 0) {
       setProductList(products.products[0]);
@@ -161,6 +160,7 @@ const mapStateToProps = (state) => ({
   products: state.products,
   username: state.user.user.firstName,
   LoggedIn: state.user.user.LoggedIn,
+  user:state.user.user,
 });
 const mapdispatchToprops = (dispatch) => ({
   getProducts: () => dispatch(asyncGetProducts()),

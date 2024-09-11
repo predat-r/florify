@@ -8,7 +8,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import LogIn from "./pages/LogIn";
 import BillingInfo from "./pages/BillingInfo";
-import Profile from "./pages/Profile"
+import Profile from "./pages/Profile";
+import Checkout from "./pages/Checkout";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
             <Route path="/BillingInfo" element={<BillingInfo />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/Profile" element={<Profile />}></Route>
+            <Route path="/Checkout" element={<Checkout />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

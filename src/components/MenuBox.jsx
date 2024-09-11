@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { logoutUser } from "../actions";
 
-function MenuBox({ loggedIn }) {
+function MenuBox({ loggedIn,LogoutUser }) {
   if (loggedIn) {
     return (
       <div className="bg-bars font-inter flex flex-col justify-evenly items-center p-5 text-center rounded-xl  shadow-elevate w-2/5 sm:w-1/6 h-2/5 absolute right-5 top-24 z-30">
@@ -10,7 +11,7 @@ function MenuBox({ loggedIn }) {
           <Link to="/Profile"> Profile</Link>{" "}
         </button>
 
-        <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
+        <button onClick={()=>LogoutUser()} className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
           Log out
         </button>
         <button className=" w-20 h-8 sm:w-20 md:w-40 sm:h-9 text-sm md:text-lg rounded-lg text-black shadow-lg  bg-background">
@@ -42,4 +43,9 @@ const mapStateToProps = (state) => {
     loggedIn: state.user.user.LoggedIn,
   };
 };
-export default connect(mapStateToProps, null)(MenuBox);
+const mapDispatchToProps = (dispatch) => { 
+  return  {
+    LogoutUser: ()=>{dispatch(logoutUser())}
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBox);

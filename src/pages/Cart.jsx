@@ -3,9 +3,9 @@ import Navbar from "../components/Navbar";
 import CartCard from "../components/CartCard";
 import { connect } from "react-redux";
 import CheckoutBtn from "../components/CheckoutBtn";
-import { removeFromCart } from "../actions";
+import { incrementQuantity, decrementQuantity, removeFromCart } from "../actions";
 import MenuBox from "../components/MenuBox";
-function Cart({ productcart, removeFromCart }) {
+function Cart({ productcart,incrementQuantity,decrementQuantity,removeFromCart }) {
   const [cart, setCart] = useState(productcart);
   const cartLength = cart.length;
   const [TotalAmount, setTotalAmount] = useState(0);
@@ -34,13 +34,16 @@ function Cart({ productcart, removeFromCart }) {
   }, [cart]);
   const increaseQuantity = (id) => {
     updateQuantity(id, 1);
+    incrementQuantity(id);
   };
   const decreaseQuantity = (id) => {
     const Product = cart.find((product) => product.id === id);
     if (Product.Quantity === 1) {
       removeFromCart(id);
     }
+
     updateQuantity(id, -1);
+    decrementQuantity(id);
   };
   const displayMenuBox = () => {
     ShowMenu ? setShowMenu(false) : setShowMenu(true);
@@ -85,5 +88,7 @@ const mapStateToprops = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   removeFromCart: (id) => dispatch(removeFromCart(id)),
+  incrementQuantity:(id)=>dispatch(incrementQuantity(id)),
+  decrementQuantity:(id)=>dispatch(decrementQuantity(id)),
 });
 export default connect(mapStateToprops, mapDispatchToProps)(Cart);
