@@ -41,7 +41,6 @@ function Cart({ productcart,incrementQuantity,decrementQuantity,removeFromCart }
     if (Product.Quantity === 1) {
       removeFromCart(id);
     }
-
     updateQuantity(id, -1);
     decrementQuantity(id);
   };

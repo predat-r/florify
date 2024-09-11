@@ -1,6 +1,6 @@
-
 import { combineReducers } from "redux";
 const cartReducer = (state = { cart: [], error: null }, action) => {
+
   switch (action.type) {
     case "ADD_TO_CART":
       const existingProduct = state.cart.find(
@@ -29,18 +29,29 @@ const cartReducer = (state = { cart: [], error: null }, action) => {
       };
     case "INCREMENT_QUANTITY":
       return {
-        cart: {
-          ...state.cart,
-          Quantity: Quantity + 1,
-        },
+        ...state,
+        cart: state.cart.map((element) =>
+          element.id !== action.payload
+            ? element
+            : {
+                ...element,
+                Quantity: element.Quantity + 1,
+              }
+        ),
       };
-      case "DECREMENT_QUANTITY":
-        return {
-          cart: {
-            ...state.cart,
-            Quantity: Quantity - 1,
-          },
-        };
+
+    case "DECREMENT_QUANTITY":
+      return {
+        ...state,
+        cart: state.cart.map((element) =>
+          element.id !== action.payload
+            ? element
+            : {
+                ...element,
+                Quantity: element.Quantity -  1,
+              }
+        ),
+      };
     default:
       return state;
       break;
@@ -58,7 +69,7 @@ const userReducer = (
   state = { user: userInitialState, error: null },
   action
 ) => {
-  console.log(state.user);
+
   switch (action.type) {
     case "CREATE_USER":
       return {
@@ -90,13 +101,10 @@ const userReducer = (
           LoggedIn: true,
         },
       };
-      case "LOGOUT_USER":
-        return {
-          user:
-          { ...userInitialState,
-            LoggedIn:false,
-          },
-        };
+    case "LOGOUT_USER":
+      return {
+        user: { ...userInitialState, LoggedIn: false },
+      };
 
     default:
       return state;
